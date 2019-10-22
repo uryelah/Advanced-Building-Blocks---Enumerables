@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/LineLength, Style/StringLiterals
+
 module Enumerable
   def my_each
     for i in 0...self.length do
@@ -74,7 +76,7 @@ module Enumerable
 
   def my_inject(initial = nil, operation = nil)
     memo = nil
-    operation = initial && initial = nil if initial.is_a? Symbol
+    operation = initial && initial.nil? if initial.is_a? Symbol
 
     if !block_given?
       case operation
@@ -91,7 +93,7 @@ module Enumerable
         end
         memo
       when :*
-        memo = initial == nil ? 1 : initial
+        memo = initial.nil? ? 1 : initial
         self.my_each do |n|
           memo *= n
         end
@@ -119,4 +121,4 @@ end
 
 puts [1,3,2,4].my_inject(100,:+)
 
-# rubocop:enable Style/CaseEquality
+# rubocop:enable Style/LineLength, Style/StringLiterals

@@ -32,5 +32,3 @@ Layout/ExtraSpacing:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
-Style/CaseEquality: 
-  Enabled: false
