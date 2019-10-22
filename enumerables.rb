@@ -87,7 +87,7 @@ module Enumerable
         end
         memo
       when :-
-        memo = initial == nil ? 0 : initial
+        memo = initial.nil? ? 0 : initial
         self.my_each do |n|
           memo -= n
         end
@@ -99,14 +99,14 @@ module Enumerable
         end
         memo
       when :/
-        memo = initial == nil ? 1 : initial
+        memo = initial.nil? ? 1 : initial
         self.my_each do |n|
           memo /= n.to_f
         end
         memo
       end
     else
-      memo = initial == nil ? self[0] : initial
+      memo = initial.nil? ? self[0] : initial
       self.my_each_with_index do |n, i|
         if initial.nil? && i == 0
           next
