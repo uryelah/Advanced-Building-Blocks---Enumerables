@@ -19,7 +19,6 @@ module Enumerable
     new_arr = []
     self.my_each do |n|
       new_arr.push(n) if yield(n)
-
     end
     new_arr
   end
@@ -27,7 +26,6 @@ module Enumerable
   def my_all?
     self.my_each do |n|
       return false unless yield(n)
-
     end
     true
   end
@@ -35,7 +33,6 @@ module Enumerable
   def my_any?
     self.my_each do |n|
       return true if yield(n)
-
     end
     false
   end
@@ -43,7 +40,6 @@ module Enumerable
   def my_none?
     self.my_each do |n|
       return false if yield(n)
-
     end
     true
   end
@@ -55,12 +51,10 @@ module Enumerable
     if !block_given?
       self.my_each do |n|
         count += 1 if n == item
-
       end
     elsif block_given?
       self.my_each do |n|
         count += 1 if yield(n)
-          
       end
     end
     count
@@ -82,34 +76,34 @@ module Enumerable
 
   def my_inject(initial = nil, operation = nil)
     memo = nil
-    operation, initial = initial, nil if initial.is_a? Symbol
+    operation = initial && initial = nil if initial.is_a? Symbol
 
-    if !block_given? 
+    if !block_given?
       case operation
-        when :+
-          memo = initial == nil ? 0 : initial
-          self.my_each do |n|
-            memo += n
-          end
-          memo
-        when :-
-          memo = initial == nil ? 0 : initial
-          self.my_each do |n|
-            memo -= n
-          end
-          memo
-        when :*
-          memo = initial == nil ? 1 : initial
-          self.my_each do |n|
-            memo *= n
-          end
-          memo
-        when :/
-          memo = initial == nil ? 1 : initial
-          self.my_each do |n|
-            memo /= n.to_f
-          end
-          memo
+      when :+
+        memo = initial.nil? ? 0 : initial
+        self.my_each do |n|
+          memo += n
+        end
+        memo
+      when :-
+        memo = initial == nil ? 0 : initial
+        self.my_each do |n|
+          memo -= n
+        end
+        memo
+      when :*
+        memo = initial == nil ? 1 : initial
+        self.my_each do |n|
+          memo *= n
+        end
+        memo
+      when :/
+        memo = initial == nil ? 1 : initial
+        self.my_each do |n|
+          memo /= n.to_f
+        end
+        memo
       end
     else
       memo = initial == nil ? self[0] : initial
@@ -125,6 +119,6 @@ module Enumerable
   end
 end
 
-puts [1,2,3,2,4].my_count(2)
+puts [1,3,2,4].my_inject(100,:+)
 
-# rubocop:disable Style/CaseEquality
+# rubocop:enable Style/CaseEquality
