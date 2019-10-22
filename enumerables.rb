@@ -1,6 +1,6 @@
-# rubocop:disable Style/CaseEquality
-
 # frozen_string_literal: true
+
+# rubocop:disable Style/CaseEquality
 
 module Enumerable
   def my_each
@@ -17,36 +17,34 @@ module Enumerable
 
   def my_select
     new_arr = []
-    self.my_each { |n|
+    self.my_each do |n|
       new_arr.push(n) if yield(n)
-    }
+    end
     new_arr
   end
 
   def my_all?
-    self.my_each { |n|
-      if !yield(n)
-        return false
-      end
-    }
+    self.my_each do |n|
+      return false unless yield(n)
+    end
     true
   end
 
   def my_any?
-    self.my_each { |n|
+    self.my_each do |n|
       if yield(n)
         return true
       end
-    }
+    end
     false
   end
 
   def my_none?
-    self.my_each { |n|
+    self.my_each do |n|
       if yield(n)
         return false
       end
-    }
+    end
     true
   end
 
@@ -55,17 +53,17 @@ module Enumerable
     if item == nil && !block_given?
       return self.length
     elsif !block_given?
-      self.my_each { |n|
+      self.my_each do |n|
         if n == item
           count += 1
         end
-      }
+      end
     elsif block_given?
-      self.my_each { |n|
+      self.my_each do |n|
         if yield(n)
           count += 1
         end
-      }
+      end
     end
     count
   end
@@ -73,13 +71,13 @@ module Enumerable
   def my_map(proc = nil)
     new_arr = []
     if proc 
-      self.my_each { |n|
+      self.my_each do |n|
         new_arr.push(proc.call(n))
-      }
+      end
     else
-    self.my_each { |n|
+    self.my_each do |n|
       new_arr.push(yield(n))
-    }
+    end
     new_arr
   end
   end
@@ -93,55 +91,45 @@ module Enumerable
       case operation
         when :+
           memo = initial == nil ? 0 : initial
-          self.my_each { |n|
+          self.my_each do |n|
             memo += n
-          }
+          end
           memo
         when :-
           memo = initial == nil ? 0 : initial
-          self.my_each { |n|
+          self.my_each do |n|
             memo -= n
-          }
+          end
           memo
         when :*
           memo = initial == nil ? 1 : initial
-          self.my_each { |n|
+          self.my_each do |n|
             memo *= n
-          }
+          end
           memo
         when :/
           memo = initial == nil ? 1 : initial
-          self.my_each { |n|
+          self.my_each do |n|
             memo /= n.to_f
-          }
+          end
           memo
       end
     else
       memo = initial == nil ? self[0] : initial
-      self.my_each_with_index { |n, i|
+      self.my_each_with_index do |n, i|
         if initial.nil? && i == 0
           next
         else
           memo = yield(memo, n)
         end
-      }
+      end
       memo
     end
   end
 end
 
-my_proc = Proc.new { |n|
-  n ** 3
+puts [1,2,3,4].my_all? { |n|
+  n >= 1
 }
-
-[1,2,3,4,5,100].my_inject(1,:*) { |acc, cr|
-  acc - cr
-}
-
-def multiply_els (arr)
-  arr.my_inject(:*)
-end
-
-puts multiply_els([2,4,5])
 
 # rubocop:disable Style/CaseEquality
