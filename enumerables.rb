@@ -19,6 +19,7 @@ module Enumerable
     new_arr = []
     self.my_each do |n|
       new_arr.push(n) if yield(n)
+
     end
     new_arr
   end
@@ -26,43 +27,40 @@ module Enumerable
   def my_all?
     self.my_each do |n|
       return false unless yield(n)
+
     end
     true
   end
 
   def my_any?
     self.my_each do |n|
-      if yield(n)
-        return true
-      end
+      return true if yield(n)
+
     end
     false
   end
 
   def my_none?
     self.my_each do |n|
-      if yield(n)
-        return false
-      end
+      return false if yield(n)
+
     end
     true
   end
 
   def my_count(item = nil)
     count = 0
-    if item == nil && !block_given?
-      return self.length
-    elsif !block_given?
+    return self.length if item.nil? && !block_given?
+
+    if !block_given?
       self.my_each do |n|
-        if n == item
-          count += 1
-        end
+        count += 1 if n == item
+
       end
     elsif block_given?
       self.my_each do |n|
-        if yield(n)
-          count += 1
-        end
+        count += 1 if yield(n)
+          
       end
     end
     count
@@ -70,23 +68,22 @@ module Enumerable
 
   def my_map(proc = nil)
     new_arr = []
-    if proc 
+    if proc
       self.my_each do |n|
         new_arr.push(proc.call(n))
       end
     else
-    self.my_each do |n|
-      new_arr.push(yield(n))
+      self.my_each do |n|
+        new_arr.push(yield(n))
+      end
+      new_arr
     end
-    new_arr
-  end
   end
 
   def my_inject(initial = nil, operation = nil)
     memo = nil
-    if initial.is_a? Symbol 
-      operation, initial = initial, nil
-    end
+    operation, initial = initial, nil if initial.is_a? Symbol
+
     if !block_given? 
       case operation
         when :+
@@ -128,8 +125,6 @@ module Enumerable
   end
 end
 
-puts [1,2,3,4].my_all? { |n|
-  n >= 1
-}
+puts [1,2,3,2,4].my_count(2)
 
 # rubocop:disable Style/CaseEquality
