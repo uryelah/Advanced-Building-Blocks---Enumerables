@@ -1,3 +1,7 @@
+# rubocop:disable Style/CaseEquality
+
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     for i in 0...self.length do
@@ -139,3 +143,5 @@ def multiply_els (arr)
 end
 
 puts multiply_els([2,4,5])
+
+# rubocop:disable Style/CaseEquality
