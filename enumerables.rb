@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/CaseEquality
-
 module Enumerable
   def my_each
     for i in 0...self.length do
