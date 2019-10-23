@@ -67,9 +67,13 @@ module Enumerable
       initial = nil
       operation = args[0]
       memo = self[0]
-    else
+    elsif args[0]
       initial = args[0]
       operation = args[1]
+      memo = initial
+    else
+      initial = args[0]
+      operation = nil
       memo = initial
     end
     if block_given?
@@ -80,11 +84,6 @@ module Enumerable
       end
     else
       # if initial.nil? ? 0 : initial
-      if initial.nil? && operaton == :+ || operation == :-
-        memo = 0
-      elsif initial.nil? && operaton == :* || operation == :/
-        memo = 1
-      end
       my_each { |n| memo = memo.send(operation, n) }
       # case operation
       # when :+
