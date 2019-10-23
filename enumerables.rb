@@ -72,6 +72,9 @@ module Enumerable
       operation = args[1]
       memo = initial
     end
+    if initial.nil? 
+      memo = 1
+    end
     if block_given?
       my_each_with_index do |n, i|
         next if initial.nil? && i.zero?
