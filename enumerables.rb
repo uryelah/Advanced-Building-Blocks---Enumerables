@@ -72,9 +72,6 @@ module Enumerable
       operation = args[1]
       memo = initial
     end
-    if initial.nil? 
-      memo = 1
-    end
     if block_given?
       my_each_with_index do |n, i|
         next if initial.nil? && i.zero?
@@ -83,11 +80,11 @@ module Enumerable
       end
     else
       # if initial.nil? ? 0 : initial
-      # if operaton == :+ || operation == :-
-      #   memo = 0
-      # elsif operaton == :* || operation == :/
-      #   memo = 1
-      # end
+      if initial.nil? && operaton == :+ || operation == :-
+        memo = 0
+      elsif initial.nil? && operaton == :* || operation == :/
+        memo = 1
+      end
       my_each { |n| memo = memo.send(operation, n) }
       # case operation
       # when :+
