@@ -66,7 +66,6 @@ module Enumerable
     if args[0].is_a? Symbol
       initial = nil
       operation = args[0]
-      memo = self[0]
     elsif args[0]
       initial = args[0]
       operation = args[1]
@@ -74,11 +73,8 @@ module Enumerable
     end
     if block_given?
       my_each_with_index do |n, i|
-        if initial.nil? && i.zero?
-          next
-        else
-          memo = yield(memo, n)
-        end
+        memo ||= n
+        memo = yield(memo, n)
       end
     else
       # if initial.nil? ? 0 : initial
