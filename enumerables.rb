@@ -84,23 +84,17 @@ module Enumerable
       when :+
         memo = initial.nil? ? 0 : initial
         my_each { |n| memo += n }
-        memo
       when :-
         memo = initial.nil? ? 0 : initial
         my_each { |n| memo -= n }
-        memo
       when :*
         memo = initial.nil? ? 1 : initial
         my_each { |n| memo *= n }
-        memo
       when :/
         memo = initial.nil? ? 1 : initial
         my_each { |n| memo /= n.to_f }
-        memo
       end
+      memo
     end
-    # if !block_given?
-    # else
-    # end
   end
 end
