@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 module Enumerable
-  # rubocop:disable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
+  # rubocop:disable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def my_each
-    for i in 0...self.length do
-      yield(self[i])
-    end
+    for i in 0...self.length { yield(self[i]) }
   end
 
   def my_each_with_index
-    for i in 0...self.length do
-      yield(self[i], i)
-    end
+    for i in 0...self.length { yield(self[i], i) }
   end
 
   def my_select
@@ -95,5 +91,5 @@ module Enumerable
       end
     end
   end
-  # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
+  # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end
