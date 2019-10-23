@@ -78,11 +78,14 @@ module Enumerable
 
         memo = yield(memo, n)
       end
-      memo
     else
-      memo = initial.nil? ? 0 : initial
-      my_each { |n| memo = memo.send(operation,n) }
-      memo
+      # if initial.nil? ? 0 : initial
+      if operaton == :+ || operation == :-
+        memo = 0
+      elsif operaton == :* || operation == :/
+        memo = 1
+      end
+      my_each { |n| memo = memo.send(operation, n) }
       # case operation
       # when :+
       #   memo = initial.nil? ? 0 : initial
@@ -102,5 +105,6 @@ module Enumerable
       #   memo
       # end
     end
+    memo
   end
 end
