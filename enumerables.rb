@@ -7,13 +7,11 @@ module Enumerable
       yield(self[i])
     end
   end
-
   def my_each_with_index
     for i in 0...self.length do
       yield(self[i], i)
     end
   end
-
   def my_select
     new_arr = []
     self.my_each do |n|
@@ -21,28 +19,24 @@ module Enumerable
     end
     new_arr
   end
-
   def my_all?
     self.my_each do |n|
       return false unless yield(n)
     end
     true
   end
-
   def my_any?
     self.my_each do |n|
       return true if yield(n)
     end
     false
   end
-
   def my_none?
     self.my_each do |n|
       return false if yield(n)
     end
     true
   end
-
   def my_count(item = nil)
     count = 0
     # if item.nil? && !block_given? return self.length end
@@ -58,7 +52,6 @@ module Enumerable
     end
     count
   end
-
   def my_map(proc = nil)
     new_arr = []
     if proc
@@ -72,7 +65,6 @@ module Enumerable
       new_arr
     end
   end
-
   def my_inject(*args)
     memo = nil
     if args[0].is_a? Symbol
@@ -121,4 +113,3 @@ module Enumerable
   end
   # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
 end
-
