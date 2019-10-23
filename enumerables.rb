@@ -74,9 +74,11 @@ module Enumerable
     end
     if block_given?
       my_each_with_index do |n, i|
-        next if initial.nil? && i.zero?
-
-        memo = yield(memo, n)
+        if initial.nil? && i.zero?
+          next
+        else
+          memo = yield(memo, n)
+        end
       end
     else
       # if initial.nil? ? 0 : initial
