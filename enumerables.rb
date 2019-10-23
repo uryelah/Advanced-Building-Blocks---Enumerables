@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerable
-# rubocop:disable Style/RedundantSelf
+  # rubocop:disable Style/RedundantSelf Metrics/CyclomaticComplexity Metrics/PerceivedComplexity Style/For
   def my_each
     for i in 0...self.length do
       yield(self[i])
@@ -75,10 +75,10 @@ module Enumerable
 
   def my_inject(*args)
     memo = nil
-    if args[0].is_a? Symbol 
+    if args[0].is_a? Symbol
       initial = nil
       operation = args[0]
-    else 
+    else
       initial = args[0]
       operation = args[1]
     end
@@ -119,8 +119,8 @@ module Enumerable
 
         memo = yield(memo, n)
       end
-      memo
+      return memo
     end
   end
-  # rubocop:enable Style/RedundantSelf
+  # rubocop:enable Style/RedundantSelf Metrics/CyclomaticComplexity Metrics/PerceivedComplexity Style/For
 end
