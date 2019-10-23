@@ -66,11 +66,20 @@ module Enumerable
     if args[0].is_a? Symbol
       initial = nil
       operation = args[0]
+      memo = self[0]
     else
       initial = args[0]
       operation = args[1]
+      memo = initial
     end
-    memo
+    if block_given? 
+      my_each_with_index do |n, i|
+        # next if initial.nil? && i.zero?
+        memo = yield(memo, n)
+        # return memo if i == length - 1
+      end
+      memo
+    end
     # if !block_given?
     #   case operation
     #   when :+
@@ -91,13 +100,6 @@ module Enumerable
     #     memo
     #   end
     # else
-    #   memo = initial.nil? ? self[0] : initial
-    #   my_each_with_index do |n, i|
-    #     next if initial.nil? && i.zero?
-
-    #     memo = yield(memo, n)
-    #     return memo if i == length - 1
-    #   end
     # end
   end
 end
