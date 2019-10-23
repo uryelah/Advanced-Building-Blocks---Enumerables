@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/LineLength, Style/StringLiterals
+# rubocop:disable Style/LineLength, Style/StringLiterals, Style/CaseEquality
 
 module Enumerable
   def my_each
