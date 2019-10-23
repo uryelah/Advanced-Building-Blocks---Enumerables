@@ -40,9 +40,9 @@ module Enumerable
 
   def my_count(item = false)
     count = 0
-    return length if !item && !block_given?
 
     if !block_given?
+      return length if !item
       my_each { |n| count += 1 if n == item }
     elsif block_given?
       my_each { |n| count += 1 if yield(n) }
