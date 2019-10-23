@@ -70,7 +70,7 @@ module Enumerable
     #   initial = args[0]
     #   operation = args[1]
     # end
-    if !block_given?
+    if true # !block_given?
       case operation
       when :+
         memo = initial.nil? ? 0 : initial
