@@ -4,13 +4,13 @@
 
 module Enumerable
   def my_each
-    for i in 0...self.length do
+    for i in 0...self.length do # rubocop:disable Style/For
       yield(self[i])
     end
   end
 
   def my_each_with_index
-    for i in 0...self.length do
+    for i in 0...self.length do # rubocop:disable Style/For
       yield(self[i], i)
     end
   end
@@ -76,7 +76,7 @@ module Enumerable
 
   def my_inject(initial = nil, operation = nil)
     memo = nil
-    operation = initial && initial.nil? if initial.is_a? Symbol
+    operation = initial&.nil? if initial.is_a? Symbol
 
     if !block_given?
       case operation
@@ -108,17 +108,13 @@ module Enumerable
     else
       memo = initial.nil? ? self[0] : initial
       self.my_each_with_index do |n, i|
-        if initial.nil? && i == 0
-          next
-        else
-          memo = yield(memo, n)
-        end
+        next if initial.nil? && i.zero?
+
+        memo = yield(memo, n)
       end
       memo
     end
   end
 end
-
-puts [1,3,2,4].my_inject(100,:+)
 
 # rubocop:enable Style/LineLength, Style/StringLiterals, Style/CaseEquality
