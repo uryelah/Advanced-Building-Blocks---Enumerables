@@ -45,6 +45,28 @@ module MyGem
 
       first.method(operation).call(second)
     end
+
+    def case_checker(item, pattern)
+      if pattern.class == Regexp
+        return false unless item.to_s.match(pattern)
+      elsif pattern.class == Class
+        return false unless item.instance_of? pattern
+      else
+        return false unless item == pattern
+      end
+      true
+    end
+
+    def any_checker(item, pattern)
+      if pattern.class == Regexp
+        return true if item.to_s.match(pattern)
+      elsif pattern.class == Class
+        return true if item.instance_of? pattern
+      elsif item == pattern
+        return true
+      end
+      false
+    end
   end
 end
 

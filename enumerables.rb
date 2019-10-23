@@ -4,42 +4,66 @@ require './helpers.rb'
 
 module Enumerable
   def my_each
+    new_arr = [] unless block_given?
     i = 0
-    while i < length
-      yield(self[i])
+    a = Array self
+    while i < a.size
+      yield(a[i]) if block_given?
+      new_arr << a[i] unless block_given?
       i += 1
     end
+    return Enumerator.new(new_arr) unless block_given?
   end
 
   def my_each_with_index
+    new_arr = [] unless block_given?
     i = 0
-    while i < length
-      yield(self[i], i)
+    while i < size
+      yield(self[i], i) if block_given?
+      new_arr << self[i] unless block_given?
       i += 1
     end
+    return Enumerator.new(new_arr) unless block_given?
   end
 
   def my_select
+    return my_each unless block_given?
+
     new_arr = []
     my_each { |n| new_arr.push(n) if yield(n) }
     new_arr
   end
 
   def my_all?(pattern = nil)
-    my_each { |n| return false unless n.to_s.match(pattern) } if pattern
-    my_each { |n| return false unless yield(n) } unless pattern
+    if block_given?
+      my_each { |n| return false unless yield(n) }
+    elsif pattern
+      my_each { |n| return false unless case_checker(n, pattern) }
+    else
+      my_each { |n| return false unless n }
+    end
     true
   end
 
   def my_any?(pattern = nil)
-    my_each { |n| return true if n.to_s.match(pattern) } if pattern
-    my_each { |n| return true if yield(n) } unless pattern
+    if block_given?
+      my_each { |n| return true if yield(n) }
+    elsif pattern
+      my_each { |n| return true if any_checker(n, pattern) }
+    else
+      my_each { |n| return true if n }
+    end
     false
   end
 
   def my_none?(pattern = nil)
-    my_each { |n| return false if n.to_s.match(pattern) } if pattern
-    my_each { |n| return false if yield(n) } unless pattern
+    if block_given?
+      my_each { |n| return false if yield(n) }
+    elsif pattern
+      my_each { |n| return false if case_checker(n, pattern) }
+    else
+      my_each { |n| return false if n }
+    end
     true
   end
 
