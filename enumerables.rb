@@ -75,33 +75,31 @@ module Enumerable
     if block_given?
       my_each_with_index do |n, i|
         next if initial.nil? && i.zero?
-        
+
         memo = yield(memo, n)
-        # return memo if i == length - 1
       end
       memo
-    else 
-      0
+    else
+      case operation
+      when :+
+        memo = initial.nil? ? 0 : initial
+        my_each { |n| memo += n }
+        memo
+      when :-
+        memo = initial.nil? ? 0 : initial
+        my_each { |n| memo -= n }
+        memo
+      when :*
+        memo = initial.nil? ? 1 : initial
+        my_each { |n| memo *= n }
+        memo
+      when :/
+        memo = initial.nil? ? 1 : initial
+        my_each { |n| memo /= n.to_f }
+        memo
+      end
     end
     # if !block_given?
-    #   case operation
-    #   when :+
-    #     memo = initial.nil? ? 0 : initial
-    #     my_each { |n| memo += n }
-    #     memo
-    #   when :-
-    #     memo = initial.nil? ? 0 : initial
-    #     my_each { |n| memo -= n }
-    #     memo
-    #   when :*
-    #     memo = initial.nil? ? 1 : initial
-    #     my_each { |n| memo *= n }
-    #     memo
-    #   when :/
-    #     memo = initial.nil? ? 1 : initial
-    #     my_each { |n| memo /= n.to_f }
-    #     memo
-    #   end
     # else
     # end
   end
