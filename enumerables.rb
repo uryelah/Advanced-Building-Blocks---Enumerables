@@ -44,7 +44,7 @@ module Enumerable
 
   def my_count(item = nil)
     count = 0
-    if item.nil? && !block_given? return self.length end
+    #if item.nil? && !block_given? return self.length end
 
     if !block_given?
       self.my_each do |n|
@@ -74,7 +74,7 @@ module Enumerable
 
   def my_inject(initial = nil, operation = nil)
     memo = nil
-    if initial.is_a? Symbol operation = initial&.nil? end
+    #if initial.is_a? Symbol operation = initial&.nil? end
 
     if !block_given?
       case operation
