@@ -109,9 +109,6 @@ module Enumerable
         end
         memo
       end
-      memo
-      puts memo
-
     else
       memo = initial.nil? ? self[0] : initial
       self.my_each_with_index do |n, i|
@@ -120,12 +117,8 @@ module Enumerable
         memo = yield(memo, n)
         return memo if i == self.length - 1
       end
-      # return memo
     end
   end
   # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
 end
 
-puts [2,8,10].my_inject { |acc, cr|
-  acc + cr
-}
