@@ -3,11 +3,19 @@
 module Enumerable
   # rubocop:disable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def my_each
-    for i in 0...self.length { yield(self[i]) }
+    i = 0
+    while i < self.length
+      yield(self[i])
+      i += 1
+    end
   end
 
   def my_each_with_index
-    for i in 0...self.length { yield(self[i], i) }
+    i = 0
+    while i < self.length
+      yield(self[i], i)
+      i += 1
+    end
   end
 
   def my_select
@@ -93,3 +101,7 @@ module Enumerable
   end
   # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end
+
+[7,9,0].my_each { |n|
+  puts n
+}
