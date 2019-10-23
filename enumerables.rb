@@ -63,13 +63,13 @@ module Enumerable
 
   def my_inject(*args)
     memo = nil
-    if args[0].is_a? Symbol
-      initial = nil
-      operation = args[0]
-    else
-      initial = args[0]
-      operation = args[1]
-    end
+    # if args[0].is_a? Symbol
+    #   initial = nil
+    #   operation = args[0]
+    # else
+    #   initial = args[0]
+    #   operation = args[1]
+    # end
     if !block_given?
       case operation
       when :+
