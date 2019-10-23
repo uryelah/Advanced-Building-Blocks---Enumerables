@@ -42,7 +42,7 @@ module Enumerable
     count = 0
 
     if !block_given?
-      return length unless !item
+      return length unless item
 
       my_each { |n| count += 1 if n == item }
     elsif block_given?
