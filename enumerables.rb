@@ -50,7 +50,6 @@ module Enumerable
     end
     count
   end
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def my_map(proc = nil)
     new_arr = []
@@ -100,5 +99,4 @@ module Enumerable
       end
     end
   end
-  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end
