@@ -82,19 +82,22 @@ module Enumerable
     else
       case operation
       when :+
-        memo = initial.nil? ? 0 : initial
-        my_each { |n| memo += n }
+        # memo = initial.nil? ? 0 : initial
+        # my_each { |n| memo += n }
+        memo
       when :-
-        memo = initial.nil? ? 0 : initial
-        my_each { |n| memo -= n }
+        # memo = initial.nil? ? 0 : initial
+        # my_each { |n| memo -= n }
+        memo
       when :*
-        memo = initial.nil? ? 1 : initial
-        my_each { |n| memo *= n }
+        # memo = initial.nil? ? 1 : initial
+        # my_each { |n| memo *= n }
+        memo
       when :/
-        memo = initial.nil? ? 1 : initial
-        my_each { |n| memo /= n.to_f }
+        # memo = initial.nil? ? 1 : initial
+        # my_each { |n| memo /= n.to_f }
+        memo
       end
-      memo
     end
   end
 end
