@@ -121,4 +121,4 @@ end
 
 puts [1,3,2,4].my_inject(100,:+)
 
-# rubocop:enable Style/LineLength, Style/StringLiterals
+# rubocop:enable Style/LineLength, Style/StringLiterals, Style/CaseEquality
