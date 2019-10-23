@@ -64,7 +64,6 @@ module Enumerable
   def my_inject(*args)
     memo = nil
     if args[0].is_a? Symbol
-      initial = nil
       operation = args[0]
     elsif args[0]
       initial = args[0]
@@ -72,7 +71,7 @@ module Enumerable
       memo = initial
     end
     if block_given?
-      my_each_with_index do |n, i|
+      my_each do |n|
         memo ||= n
         memo = yield(memo, n)
       end
