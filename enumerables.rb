@@ -72,13 +72,16 @@ module Enumerable
       operation = args[1]
       memo = initial
     end
-    if block_given? 
+    if block_given?
       my_each_with_index do |n, i|
-        # next if initial.nil? && i.zero?
+        next if initial.nil? && i.zero?
+        
         memo = yield(memo, n)
         # return memo if i == length - 1
       end
       memo
+    else 
+      0
     end
     # if !block_given?
     #   case operation
