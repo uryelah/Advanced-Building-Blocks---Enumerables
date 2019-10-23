@@ -70,7 +70,7 @@ module Enumerable
     #   initial = args[0]
     #   operation = args[1]
     # end
-    if true # !block_given?
+    if !block_given?
       case operation
       when :+
         memo = initial.nil? ? 0 : initial
@@ -89,14 +89,14 @@ module Enumerable
         my_each { |n| memo /= n.to_f }
         memo
       end
-    else
-      memo = initial.nil? ? self[0] : initial
-      my_each_with_index do |n, i|
-        next if initial.nil? && i.zero?
+    # else
+    #   memo = initial.nil? ? self[0] : initial
+    #   my_each_with_index do |n, i|
+    #     next if initial.nil? && i.zero?
 
-        memo = yield(memo, n)
-        return memo if i == length - 1
-      end
+    #     memo = yield(memo, n)
+    #     return memo if i == length - 1
+    #   end
     end
   end
 end
