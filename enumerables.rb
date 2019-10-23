@@ -80,24 +80,27 @@ module Enumerable
       end
       memo
     else
-      case operation
-      when :+
-        # memo = initial.nil? ? 0 : initial
-        # my_each { |n| memo += n }
-        memo
-      when :-
-        # memo = initial.nil? ? 0 : initial
-        # my_each { |n| memo -= n }
-        memo
-      when :*
-        # memo = initial.nil? ? 1 : initial
-        # my_each { |n| memo *= n }
-        memo
-      when :/
-        # memo = initial.nil? ? 1 : initial
-        # my_each { |n| memo /= n.to_f }
-        memo
-      end
+      memo = initial.nil? ? 0 : initial
+      my_each { |n| memo = memo.send(operation,n) }
+      memo
+      # case operation
+      # when :+
+      #   memo = initial.nil? ? 0 : initial
+      #   my_each { |n| memo += n }
+      #   memo
+      # when :-
+      #   memo = initial.nil? ? 0 : initial
+      #   my_each { |n| memo -= n }
+      #   memo
+      # when :*
+      #   memo = initial.nil? ? 1 : initial
+      #   my_each { |n| memo *= n }
+      #   memo
+      # when :/
+      #   memo = initial.nil? ? 1 : initial
+      #   my_each { |n| memo /= n.to_f }
+      #   memo
+      # end
     end
   end
 end
