@@ -101,7 +101,3 @@ module Enumerable
   end
   # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 end
-
-[7,9,0].my_each { |n|
-  puts n
-}
