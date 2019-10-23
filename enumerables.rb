@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Enumerable
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def my_each
     i = 0
     while i < length
@@ -50,6 +49,7 @@ module Enumerable
     end
     count
   end
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def my_map(proc = nil)
     new_arr = []
