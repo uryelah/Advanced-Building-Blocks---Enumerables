@@ -3,43 +3,31 @@
 module Enumerable
   # rubocop:disable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
   def my_each
-    for i in 0...self.length do
-      yield(self[i])
-    end
+    for i in 0...self.length { yield(self[i]) }
   end
 
   def my_each_with_index
-    for i in 0...self.length do
-      yield(self[i], i)
-    end
+    for i in 0...self.length { yield(self[i], i) }
   end
 
   def my_select
     new_arr = []
-    self.my_each do |n|
-      new_arr.push(n) if yield(n)
-    end
+    self.my_each { |n| new_arr.push(n) if yield(n) }
     new_arr
   end
 
   def my_all?
-    self.my_each do |n|
-      return false unless yield(n)
-    end
+    self.my_each { |n| return false unless yield(n) }
     true
   end
 
   def my_any?
-    self.my_each do |n|
-      return true if yield(n)
-    end
+    self.my_each { |n| return true if yield(n) }
     false
   end
 
   def my_none?
-    self.my_each do |n|
-      return false if yield(n)
-    end
+    self.my_each { |n| return false if yield(n) }
     true
   end
 
