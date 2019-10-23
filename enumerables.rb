@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require './helpers.rb'
+
 module Enumerable
   def my_each
     i = 0
@@ -63,8 +65,10 @@ module Enumerable
 
   def my_inject(*args)
     memo = nil
-    if args[0].is_a? Symbol
+    if oop?(args[0])
+      initial = args[1]
       operation = args[0]
+      memo = initial
     elsif args[0]
       initial = args[0]
       operation = args[1]
@@ -72,30 +76,12 @@ module Enumerable
     end
     if block_given?
       my_each do |n|
+        memo && memo = yield(memo, n)
         memo ||= n
-        memo = yield(memo, n)
       end
     else
-      # if initial.nil? ? 0 : initial
-      my_each { |n| memo = memo.send(operation, n) }
-      # case operation
-      # when :+
-      #   memo = initial.nil? ? 0 : initial
-      #   my_each { |n| memo += n }
-      #   memo
-      # when :-
-      #   memo = initial.nil? ? 0 : initial
-      #   my_each { |n| memo -= n }
-      #   memo
-      # when :*
-      #   memo = initial.nil? ? 1 : initial
-      #   my_each { |n| memo *= n }
-      #   memo
-      # when :/
-      #   memo = initial.nil? ? 1 : initial
-      #   my_each { |n| memo /= n.to_f }
-      #   memo
-      # end
+      memo = nil_asign(operation, memo)
+      my_each { |n| memo = oop_eval(memo, n, operation) }
     end
     memo
   end
