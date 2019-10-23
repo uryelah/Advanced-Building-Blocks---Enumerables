@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/LineLength, Style/StringLiterals, Style/CaseEquality
-
 module Enumerable
   def my_each
     for i in 0...self.length do # rubocop:disable Style/For
@@ -46,7 +44,7 @@ module Enumerable
 
   def my_count(item = nil)
     count = 0
-    return self.length if item.nil? && !block_given?
+    if item.nil? && !block_given? return self.length end
 
     if !block_given?
       self.my_each do |n|
@@ -76,7 +74,7 @@ module Enumerable
 
   def my_inject(initial = nil, operation = nil)
     memo = nil
-    operation = initial&.nil? if initial.is_a? Symbol
+    if initial.is_a? Symbol operation = initial&.nil? end
 
     if !block_given?
       case operation
@@ -116,5 +114,3 @@ module Enumerable
     end
   end
 end
-
-# rubocop:enable Style/LineLength, Style/StringLiterals, Style/CaseEquality
