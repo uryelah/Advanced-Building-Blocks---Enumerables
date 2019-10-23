@@ -63,32 +63,33 @@ module Enumerable
 
   def my_inject(*args)
     memo = nil
-    # if args[0].is_a? Symbol
-    #   initial = nil
-    #   operation = args[0]
-    # else
-    #   initial = args[0]
-    #   operation = args[1]
-    # end
-    if !block_given?
-      case operation
-      when :+
-        memo = initial.nil? ? 0 : initial
-        my_each { |n| memo += n }
-        memo
-      when :-
-        memo = initial.nil? ? 0 : initial
-        my_each { |n| memo -= n }
-        memo
-      when :*
-        memo = initial.nil? ? 1 : initial
-        my_each { |n| memo *= n }
-        memo
-      when :/
-        memo = initial.nil? ? 1 : initial
-        my_each { |n| memo /= n.to_f }
-        memo
-      end
+    if args[0].is_a? Symbol
+      initial = nil
+      operation = args[0]
+    else
+      initial = args[0]
+      operation = args[1]
+    end
+    memo
+    # if !block_given?
+    #   case operation
+    #   when :+
+    #     memo = initial.nil? ? 0 : initial
+    #     my_each { |n| memo += n }
+    #     memo
+    #   when :-
+    #     memo = initial.nil? ? 0 : initial
+    #     my_each { |n| memo -= n }
+    #     memo
+    #   when :*
+    #     memo = initial.nil? ? 1 : initial
+    #     my_each { |n| memo *= n }
+    #     memo
+    #   when :/
+    #     memo = initial.nil? ? 1 : initial
+    #     my_each { |n| memo /= n.to_f }
+    #     memo
+    #   end
     # else
     #   memo = initial.nil? ? self[0] : initial
     #   my_each_with_index do |n, i|
@@ -97,6 +98,6 @@ module Enumerable
     #     memo = yield(memo, n)
     #     return memo if i == length - 1
     #   end
-    end
+    # end
   end
 end
