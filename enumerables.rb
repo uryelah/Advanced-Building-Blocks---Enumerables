@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerable
+# rubocop:disable Style/RedundantSelf
   def my_each
     for i in 0...self.length do
       yield(self[i])
@@ -121,4 +122,5 @@ module Enumerable
       memo
     end
   end
+  # rubocop:enable Style/RedundantSelf
 end
