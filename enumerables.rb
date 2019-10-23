@@ -25,18 +25,21 @@ module Enumerable
     new_arr
   end
 
-  def my_all?
-    my_each { |n| return false unless yield(n) }
+  def my_all?(pattern = nil)
+    my_each { |n| return false unless n.to_s.match(pattern) } if pattern
+    my_each { |n| return false unless yield(n) } unless pattern
     true
   end
 
-  def my_any?
-    my_each { |n| return true if yield(n) }
+  def my_any?(pattern = nil)
+    my_each { |n| return true if n.to_s.match(pattern) } if pattern
+    my_each { |n| return true if yield(n) } unless pattern
     false
   end
 
-  def my_none?
-    my_each { |n| return false if yield(n) }
+  def my_none?(pattern = nil)
+    my_each { |n| return false if n.to_s.match(pattern) } if pattern
+    my_each { |n| return false if yield(n) } unless pattern
     true
   end
 
@@ -58,7 +61,9 @@ module Enumerable
     if proc
       my_each { |n| new_arr.push(proc.call(n)) }
     else
-      my_each { |n| new_arr.push(yield(n)) }
+      my_each { |n| new_arr.push(yield(n)) } if block_given?
+      my_each { |n| new_arr << n } unless block_given?
+      new_arr = Enumerator.new(new_arr) unless block_given?
       new_arr
     end
   end
