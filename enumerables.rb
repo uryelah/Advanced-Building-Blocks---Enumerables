@@ -37,7 +37,7 @@ module Enumerable
 
   def my_count(item = nil)
     count = 0
-    # if item.nil? && !block_given? return self.length end
+    return self.length if item.nil? && !block_given?
 
     if !block_given?
       self.my_each { |n| count += 1 if n == item }
