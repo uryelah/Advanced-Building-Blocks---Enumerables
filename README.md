@@ -37,9 +37,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is about implementing your own version of some of the Enumerable module methods in order to reinforce and apply ruby sintax.
+This project is about implementing your own version of some of the Enumerable module methods in order to reinforce and apply ruby syntax.
 
-The methods are rebuilt based of the spects at [ruby-doc.org](https://ruby-doc.org/core-2.6.5/Enumerable.html) and are the following:
+The methods are rebuilt based on the specs at [ruby-doc.org](https://ruby-doc.org/core-2.6.5/Enumerable.html) and are the following:
 
 - #my_each
 
@@ -62,7 +62,7 @@ The methods are rebuilt based of the spects at [ruby-doc.org](https://ruby-doc.o
 
 This project was linted with the provided rubocop configuration files.
 
-The built Enumerable methods are inside the enumerables.rb file and some helper functoins meant to decrease the complexity of the #my_inject module are located at the helpers.rb file.
+The built Enumerable methods are inside the enumerables.rb file and some helper methods meant to decrease the complexity of the #my_inject module are located at the helpers.rb file.
 
 This is also part of the [Odin project curriculum](https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks)
 
