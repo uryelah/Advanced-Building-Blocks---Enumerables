@@ -118,9 +118,14 @@ module Enumerable
         next if initial.nil? && i.zero?
 
         memo = yield(memo, n)
+        return memo if i == self.length - 1
       end
-      return memo
+      # return memo
     end
   end
   # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
 end
+
+puts [2,8,10].my_inject { |acc, cr|
+  acc + cr
+}
