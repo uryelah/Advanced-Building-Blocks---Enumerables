@@ -1,5 +1,4 @@
 AllCops:
-  Enabled: false
   Exclude:
     - "bin/*"
     - "db/**/*"
