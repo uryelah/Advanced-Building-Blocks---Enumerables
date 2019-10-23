@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerable
-  # rubocop:disable Style/RedundantSelf Metrics/CyclomaticComplexity Metrics/PerceivedComplexity Style/For
+  # rubocop:disable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
   def my_each
     for i in 0...self.length do
       yield(self[i])
@@ -122,5 +122,5 @@ module Enumerable
       return memo
     end
   end
-  # rubocop:enable Style/RedundantSelf Metrics/CyclomaticComplexity Metrics/PerceivedComplexity Style/For
+  # rubocop:enable Style/RedundantSelf, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/For
 end
