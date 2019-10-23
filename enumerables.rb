@@ -80,11 +80,11 @@ module Enumerable
       end
     else
       # if initial.nil? ? 0 : initial
-      if operaton == :+ || operation == :-
-        memo = 0
-      elsif operaton == :* || operation == :/
-        memo = 1
-      end
+      # if operaton == :+ || operation == :-
+      #   memo = 0
+      # elsif operaton == :* || operation == :/
+      #   memo = 1
+      # end
       my_each { |n| memo = memo.send(operation, n) }
       # case operation
       # when :+
