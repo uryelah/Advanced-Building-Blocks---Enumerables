@@ -8,7 +8,8 @@ RSpec.describe Enumerable do
   let(:false_arr) { [nil, false, nil, false, false] }
   let(:truthy_arr) { [nil, false, 1, false, nil, nil] }
   let(:equal_arr) { [100, 100, 100] }
-  let(:str_arr) { ['2', '10', '1', '100', '12', '-10'] }
+  let(:str_arr) { ['2', '10', '1', 'House', '12', '-10'] }
+  let(:comb_arr) { [2, 10, '1', 'House', 12, 'LOL'] }
   let(:sym_same_arr) { %i[1 1 1] }
   let(:sym_dif_arr) { %i[2 b 1] }
   let(:range) { (1..5) }
@@ -90,6 +91,21 @@ RSpec.describe Enumerable do
   end
 
   describe 'my_select' do
+    it 'Returns an enumerator unless a block is given' do
+      expect(num_arr.my_select).to be_kind_of(Enumerator)
+    end
+
+    it 'Returns an array when block is given' do
+      expect(hash.my_select{}).to eql([])
+    end
+
+    it 'Returns an array with selected elements when a block is given' do
+      expect(comb_arr.my_select { |e| e.is_a? String }).to eql(['1', 'House', 'LOL'])
+    end
+
+    it 'Returns an error when the block returns something else than true or false' do
+      expect(comb_arr.my_select { |e| e.to_s }).to raise_error
+    end
   end
 
   describe 'my_all?' do
@@ -145,6 +161,55 @@ RSpec.describe Enumerable do
   end
 
   describe 'my_any?' do
+    it 'Should return false if none of the items are truthy and no block or parameter were given' do
+      expect(false_arr.my_any?).to be false
+    end
+
+    it 'Should return true if at least one of the items is truthy and no block or parameter were given' do
+      expect(truthy_arr.my_any?).to be true
+    end
+
+    it 'Returns false if none elements pass the condition with block given in enumerable' do
+      expect(num_arr.my_any? { |e| e > 200 }).to be false
+    end
+
+    it 'Returns true if at least one element pass the condition with block given in enumerable' do
+      expect(num_arr.my_any? { |e| e < 0}).to be true
+    end
+
+    it 'Should return false if none of the items in the enum is
+    equal to the parameter and parameter is not a Class or a RegExp and no block was given' do
+      expect(num_arr.my_any?(200)).to be false
+    end
+
+    it 'Should return true if at least one of the items in the enum are equal
+    to the parameter and parameter is not a Class or a RegExp and no block was given' do
+      expect(equal_arr.my_any?(100)).to be true
+    end
+
+    it 'Returns false if none of the items of an enum is an instance of the same Class and no block was given' do
+      expect(num_arr.my_any?(String)).to be false
+    end
+
+    it 'Returns true if at least one item in enum is an instance of the same Class and no block was given' do
+      expect(truthy_arr.my_any?(Integer)).to be true
+    end
+
+    it 'Returns true if at least one item of a hash is the same Symbol as the given parameter and no block was given' do
+      expect(sym_dif_arr.my_any?(one_symbol)).to be true
+    end
+
+    it 'Returns false if none of the items of a hash is not the same Symbol as the given parameter and no block was given' do
+      expect(sym_same_arr.my_any?(two_symbol)).to be false
+    end
+
+    it 'Returns true if at least one item of enum matches the RegExp parameter and no block was given' do
+      expect(truthy_arr.my_any?(/\d/)).to be true
+    end
+
+    it 'Returns false if none of the items of enum matches the RegExp parameter and no block was given' do
+      expect(falsy_arr.my_any?(/zzz/)).to be false
+    end
   end
 
   describe 'my_none?' do
@@ -197,7 +262,6 @@ RSpec.describe Enumerable do
     it 'Returns false if an item of enum matches the RegExp parameter and no block was given' do
       expect(falsy_arr.my_none?(/\d/)).to be false
     end
-
   end
 
   describe 'my_count' do
