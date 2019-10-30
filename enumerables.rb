@@ -13,6 +13,8 @@ module Enumerable
       i += 1
     end
     return Enumerator.new(new_arr) unless block_given?
+
+    self
   end
 
   def my_each_with_index
@@ -24,6 +26,8 @@ module Enumerable
       i += 1
     end
     return Enumerator.new(new_arr) unless block_given?
+
+    self
   end
 
   def my_select
