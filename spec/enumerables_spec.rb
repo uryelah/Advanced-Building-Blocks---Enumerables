@@ -17,11 +17,6 @@ RSpec.describe Enumerable do
       str_arr.my_each { |n| empty_str += n }
       expect(empty_str).to eql('210110012-10')
     end
-
-    it "should test something" do
-      # just an example
-      expect num_arr.my_each { |b| puts(&b) }.to yield_successive_args
-    end
   end
 
   describe "my_each_with_index" do
