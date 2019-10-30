@@ -13,17 +13,22 @@ module Enumerable
       i += 1
     end
     return Enumerator.new(new_arr) unless block_given?
+
+    self
   end
 
   def my_each_with_index
     new_arr = [] unless block_given?
     i = 0
+    a = Array self
     while i < size
-      yield(self[i], i) if block_given?
-      new_arr << self[i] unless block_given?
+      yield(a[i], i) if block_given?
+      new_arr << a[i] unless block_given?
       i += 1
     end
     return Enumerator.new(new_arr) unless block_given?
+
+    self
   end
 
   def my_select
