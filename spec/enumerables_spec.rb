@@ -96,15 +96,15 @@ RSpec.describe Enumerable do
     end
 
     it 'Returns an array when block is given' do
-      expect(hash.my_select{}).to eql([])
+      expect(hash.my_select { |_e| }).to eql([])
     end
 
     it 'Returns an array with selected elements when a block is given' do
-      expect(comb_arr.my_select { |e| e.is_a? String }).to eql(['1', 'House', 'LOL'])
+      expect(comb_arr.my_select { |e| e.is_a? String }).to eql(%w[1 House LOL])
     end
 
-    it 'Returns an error when the block returns something else than true or false' do
-      expect(comb_arr.my_select { |e| e.to_s }).to raise_error
+    it 'Returns the given enum when the block returns something else than true or false' do
+      expect(comb_arr.my_select { |e| e }).to eql(comb_arr)
     end
   end
 
@@ -264,7 +264,24 @@ RSpec.describe Enumerable do
     end
   end
 
+=begin
+count → int
+count(item) → int
+count { |obj| block } → int
+
+Returns the number of items in enum through enumeration. 
+If an argument is given, the number of items in enum that are equal to item are counted.
+If a block is given, it counts the number of elements yielding a true value.
+=end
+
   describe 'my_count' do
+    it 'Should return the number of elements in the enum as an Integer if no parameter or block are given' do
+      expect(equal_arr.my_count).to eql(3)
+    end
+
+    it 'Should return the number of elements in the enum that are equal to the given parameter as an Integer' do
+      expect(truthy_arr.my_count(1)).to eql(1)
+    end
   end
 
   describe 'my_map' do
