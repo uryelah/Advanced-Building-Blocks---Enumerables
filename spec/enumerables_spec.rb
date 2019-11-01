@@ -325,10 +325,59 @@ RSpec.describe Enumerable do
   end
 
   describe 'my_inject' do
+    it 'Should return an accumulator that combines all elements of enum when just a symbol is given, in an array' do
+      expect(num_arr.my_inject(:+)).to eql(115)
+    end
 
+    it 'Should return an accumulator that combines all elements of enum when just a symbol is given, in a range' do
+      expect(range.my_inject(:+)).to eql(15)
+    end
+
+    it 'Should return an accumulator that combines all elements of enum when a start value and symbol are given, in an array' do
+      expect(num_arr.my_inject(3, :+)).to eql(118)
+    end
+
+    it 'Should return an accumulator that combines all elements of enum when a start value and symbol are given, in a range' do
+      expect(range.my_inject(3, :+)).to eql(18)
+    end
+
+    it 'Should return an accumulator that combines all elements of enum when a start value and symbol are given, in a range' do
+      expect(str_arr.my_inject('mama', :+)).to eql('mama2101House12-10')
+    end
+
+    it 'Should return an accumulator that combines all elements of enum when a block is given with no parameters' do
+      expect(range.my_inject { |acc, e| acc * e }).to eql(120)
+    end
+
+    it 'Should return an accumulator that combines all elements of enum when a block is given with no parameters' do
+      expect(range.my_inject(3) { |acc, e| acc * e }).to eql(360)
+    end
+
+    it 'Should return an accumulator that combines all elements and start value of enum when a block and a start value is given' do
+      expect(range.my_inject(3) { |acc, e| acc * e }).to eql(360)
+    end
+
+    it 'Should return an accumulator that combines all elements
+    and start value ignoring the block when start value and symbol are given' do
+      expect(range.my_inject(3, :+) { |acc, e| acc * e }).to eql(18)
+    end
+
+    it 'Should return an accumulator (array) that combines all pairs in a hash
+  when a block with no parameters' do
+      expect(hash.my_inject { |acc, e | acc + e }).to eql(hash.to_a.flatten)
+    end
+
+    it 'Should return an accumulator that combines all elements
+    and start value ignoring the block when start value and symbol are given' do
+      expect(hash.my_inject { |acc, e| acc + e }).to eql(hash.to_a.flatten)
+    end
+
+    it 'Should return an accumulator that combines all elements
+    and start value ignoring the block when start value and symbol are given' do
+      expect(range.my_inject {}).to eql(nil)
+    end
   end
 end
-
 
 =begin
 it 'Puts each item of the array if a block is given' do
