@@ -9,4 +9,4 @@ files:
     - "config/*"
     - "Guardfile"
     - "Rakefile"
-    - "spec_helper.rb"
+    - "spec/spec_helper.rb"

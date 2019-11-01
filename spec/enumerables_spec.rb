@@ -176,7 +176,7 @@ RSpec.describe Enumerable do
     end
 
     it 'Returns true if at least one element pass the condition with block given in enumerable' do
-      expect(num_arr.my_any? { |e| e < 0}).to be true
+      expect(num_arr.my_any? { |e| e < 0 }).to be true
     end
 
     it 'Should return false if none of the items in the enum is
@@ -201,7 +201,8 @@ RSpec.describe Enumerable do
       expect(sym_dif_arr.my_any?(one_symbol)).to be true
     end
 
-    it 'Returns false if none of the items of a hash is not the same Symbol as the given parameter and no block was given' do
+    it 'Returns false if none of the items of a hash is
+    the same Symbol as the given parameter and no block was given' do
       expect(sym_same_arr.my_any?(two_symbol)).to be false
     end
 
@@ -241,11 +242,13 @@ RSpec.describe Enumerable do
       expect(equal_arr.my_none?(200)).to be true
     end
 
-    it 'Returns false if an item of an array is an instance of the same Class given as parameter and no block was given' do
+    it 'Returns false if an item of an array is
+    an instance of the same Class given as parameter and no block was given' do
       expect(truthy_arr.my_none?(Integer)).to be false
     end
 
-    it 'Return true if all items in enum aren\'t instances of the same Class given as parameter and no block was given' do
+    it 'Return true if all items in enum aren\'t instances of
+    the same Class given as parameter and no block was given' do
       expect((5..50).my_none?(String)).to be true
     end
 
@@ -279,19 +282,23 @@ RSpec.describe Enumerable do
       expect(str_arr.my_count { |e| e.length > 2 }).to eql(2)
     end
 
-    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+    it 'Should return the number of elements in the enum that are equal
+    to the given parameter if a parameter and a block are given' do
       expect(num_arr.my_count(100) { |e| e.length > 2 }).to eql(1)
     end
 
-    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+    it 'Should return the number of elements in the enum that are equal
+    to the given parameter if a parameter and a block are given' do
       expect(num_arr.my_count(Integer)).to eql(0)
     end
 
-    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+    it 'Should return the number of elements in the enum that are equal
+    to the given parameter if a parameter and a block are given' do
       expect((1..10).my_count).to eql(10)
     end
 
-    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+    it 'Should return the number of elements in the enum that are equal to
+    the given parameter if a parameter and a block are given' do
       expect((1..10).my_count).to eql(10)
     end
   end
@@ -309,7 +316,8 @@ RSpec.describe Enumerable do
       expect(range.my_map { |e| e }).to eql([1, 2, 3, 4, 5])
     end
 
-    it 'Should return an array of arrays, each containing a key value pair, if used with a hash and block is given just returning the hash pair' do
+    it 'Should return an array of arrays, each containing a key value pair, if used with
+    a hash and block is given just returning the hash pair' do
       expect(hash.my_map { |e| e }).to eql([[:a, 1], [:b, 2], [:c, 3]])
     end
 
@@ -335,11 +343,13 @@ RSpec.describe Enumerable do
       expect(range.my_inject(:+)).to eql(15)
     end
 
-    it 'Should return an accumulator that combines all elements of enum when a start value and symbol are given, in an array' do
+    it 'Should return an accumulator that combines all elements of enum when
+    a start value and symbol are given, in an array' do
       expect(num_arr.my_inject(3, :+)).to eql(118)
     end
 
-    it 'Should return an accumulator that combines all elements of enum when a start value and symbol are given, in a range' do
+    it 'Should return an accumulator that combines
+    all elements of enum when a start value and symbol are given, in a range' do
       expect(range.my_inject(3, :+)).to eql(18)
     end
 
@@ -347,7 +357,8 @@ RSpec.describe Enumerable do
       expect(str_arr.my_inject('mama', :+)).to eql('mama2101House12-10')
     end
 
-    it 'Should return an accumulator that combines all elements of enum when a block is given when a start value is given' do
+    it 'Should return an accumulator that combines all elements of
+    enum when a block is given when a start value is given' do
       expect(range.my_inject(3) { |acc, e| acc * e }).to eql(360)
     end
 
