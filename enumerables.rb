@@ -76,7 +76,7 @@ module Enumerable
     count = 0
 
     if !block_given?
-      return length unless item
+      return size unless item
 
       my_each { |n| count += 1 if n == item }
     elsif block_given? && !item

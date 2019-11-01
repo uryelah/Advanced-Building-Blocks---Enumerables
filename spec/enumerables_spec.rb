@@ -264,16 +264,6 @@ RSpec.describe Enumerable do
     end
   end
 
-=begin
-count → int
-count(item) → int
-count { |obj| block } → int
-
-Returns the number of items in enum through enumeration. 
-If an argument is given, the number of items in enum that are equal to item are counted.
-If a block is given, it counts the number of elements yielding a true value.
-=end
-
   describe 'my_count' do
     it 'Should return the number of elements in the enum as an Integer if no parameter or block are given' do
       expect(equal_arr.my_count).to eql(3)
@@ -281,6 +271,26 @@ If a block is given, it counts the number of elements yielding a true value.
 
     it 'Should return the number of elements in the enum that are equal to the given parameter as an Integer' do
       expect(truthy_arr.my_count(1)).to eql(1)
+    end
+
+    it 'Should return the number of elements in the enum that are equal to the given parameter as an Integer' do
+      expect(str_arr.my_count { |e| e.length > 2 }).to eql(2)
+    end
+
+    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+      expect(num_arr.my_count(100) { |e| e.length > 2 }).to eql(1)
+    end
+
+    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+      expect(num_arr.my_count(Integer)).to eql(0)
+    end
+
+    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+      expect((1..10).my_count).to eql(10)
+    end
+
+    it 'Should return the number of elements in the enum that are equal to the given parameter if a parameter and a block are given' do
+      expect((1..10).my_count).to eql(10)
     end
   end
 
