@@ -1,4 +1,6 @@
-#spec/enumerables_spec.rb
+# frozen_string_literal: true
+
+# spec/enumerables_spec.rb
 
 require './enumerables.rb'
 
@@ -366,3 +368,4 @@ RSpec.describe Enumerable do
       expect(range.my_inject {}).to eql(nil)
     end
   end
+end
