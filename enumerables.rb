@@ -110,7 +110,7 @@ module Enumerable
       operation = args[1]
       memo = initial
     end
-    if block_given?
+    if block_given? && operation.nil?
       my_each do |n|
         memo && memo = yield(memo, n)
         memo ||= n
