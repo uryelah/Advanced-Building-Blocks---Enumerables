@@ -295,9 +295,37 @@ RSpec.describe Enumerable do
   end
 
   describe 'my_map' do
+    it 'Should return an enumerator unless a block is given' do
+      expect(num_arr.my_map).to be_kind_of(Enumerator)
+    end
+
+    it 'Should return a new array with it\'s elements mutated by the block given' do
+      expect(num_arr.my_map { |e| e**2 }).to eql([4, 100, 1, 10_000, 144, 100])
+    end
+
+    it 'Should return an array including each element in a range when a block is given' do
+      expect(range.my_map { |e| e }).to eql([1, 2, 3, 4, 5])
+    end
+
+    it 'Should return an array of arrays, each containing a key value pair, if used with a hash and block is given just returning the hash pair' do
+      expect(hash.my_map { |e| e }).to eql([[:a, 1], [:b, 2], [:c, 3]])
+    end
+
+    it 'Should be able to access both the key and value from a hash if the block given has two parameters' do
+      expect(hash.my_map { |key, val| [key.to_s, val * 2] }).to eql([['a', 2], ['b', 4], ['c', 6]])
+    end
+
+    it 'Should be able to use array methods and operations to parameter inside block if only one parameter is given' do
+      expect(hash.my_map { |e| e * 2 }).to eql([[:a, 1, :a, 1], [:b, 2, :b, 2], [:c, 3, :c, 3]])
+    end
+
+    it 'Should be able to use array methods and operations to parameter inside block if only one parameter is given' do
+      expect(hash.my_map { |e| e + [2] }).to eql([[:a, 1, 2], [:b, 2, 2], [:c, 3, 2]])
+    end
   end
 
   describe 'my_inject' do
+
   end
 end
 
