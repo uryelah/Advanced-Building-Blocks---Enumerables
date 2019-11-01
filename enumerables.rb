@@ -79,8 +79,10 @@ module Enumerable
       return length unless item
 
       my_each { |n| count += 1 if n == item }
-    elsif block_given?
+    elsif block_given? && !item
       my_each { |n| count += 1 if yield(n) }
+    elsif block_given? && item
+      my_each { |n| count += 1 if n == item }
     end
     count
   end
