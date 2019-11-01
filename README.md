@@ -66,6 +66,8 @@ The built Enumerable methods are inside the enumerables.rb file and some helper 
 
 This is also part of the [Odin project curriculum](https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks)
 
+This project includes tests using RSpec, the tests are included in the spec folder.
+
 <!-- ABOUT THE PROJECT -->
 ## Requirements
 
