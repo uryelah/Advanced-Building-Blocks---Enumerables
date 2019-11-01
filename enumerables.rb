@@ -2,7 +2,7 @@
 
 require './helpers.rb'
 
-module Enumerable
+module Enumerable # rubocop:disable Metrics/ModuleLength
   def my_each
     new_arr = [] unless block_given?
     i = 0
@@ -72,7 +72,7 @@ module Enumerable
     true
   end
 
-  def my_count(item = false)
+  def my_count(item = false) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     count = 0
 
     if !block_given?
@@ -99,7 +99,7 @@ module Enumerable
     end
   end
 
-  def my_inject(*args)
+  def my_inject(*args) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     memo = nil
     if oop?(args[0])
       initial = args[1]
@@ -114,6 +114,7 @@ module Enumerable
       my_each do |n|
         memo && memo = yield(memo, n)
         memo ||= n
+        memo = nil if yield(memo, n).nil?
       end
     else
       memo = nil_asign(operation, memo)
