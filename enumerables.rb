@@ -2,7 +2,7 @@
 
 require './helpers.rb'
 
-module Enumerable
+module Enumerable # rubocop:disable Metrics/ModuleLength
   def my_each
     new_arr = [] unless block_given?
     i = 0
@@ -13,17 +13,22 @@ module Enumerable
       i += 1
     end
     return Enumerator.new(new_arr) unless block_given?
+
+    self
   end
 
   def my_each_with_index
     new_arr = [] unless block_given?
     i = 0
+    a = Array self
     while i < size
-      yield(self[i], i) if block_given?
-      new_arr << self[i] unless block_given?
+      yield(a[i], i) if block_given?
+      new_arr << a[i] unless block_given?
       i += 1
     end
     return Enumerator.new(new_arr) unless block_given?
+
+    self
   end
 
   def my_select
@@ -67,15 +72,17 @@ module Enumerable
     true
   end
 
-  def my_count(item = false)
+  def my_count(item = false) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     count = 0
 
     if !block_given?
-      return length unless item
+      return size unless item
 
       my_each { |n| count += 1 if n == item }
-    elsif block_given?
+    elsif block_given? && !item
       my_each { |n| count += 1 if yield(n) }
+    elsif block_given? && item
+      my_each { |n| count += 1 if n == item }
     end
     count
   end
@@ -92,7 +99,7 @@ module Enumerable
     end
   end
 
-  def my_inject(*args)
+  def my_inject(*args) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     memo = nil
     if oop?(args[0])
       initial = args[1]
@@ -103,10 +110,11 @@ module Enumerable
       operation = args[1]
       memo = initial
     end
-    if block_given?
+    if block_given? && operation.nil?
       my_each do |n|
         memo && memo = yield(memo, n)
         memo ||= n
+        memo = nil if yield(memo, n).nil?
       end
     else
       memo = nil_asign(operation, memo)
